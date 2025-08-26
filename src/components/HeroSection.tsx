@@ -7,24 +7,36 @@ import { ArrowRight, Code, Server, Zap, Brackets, Terminal, Database, Globe, Cpu
 const HeroSection = () => {
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { 
+      opacity: 0,
+      transform: 'translateZ(0)', // Force GPU layer
+    },
     visible: {
       opacity: 1,
+      transform: 'translateZ(0)',
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
+        delayChildren: 0.2,
+        staggerChildren: 0.1, // Reduced for faster perception
+        ease: [0.25, 0.46, 0.45, 0.94],
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { 
+      y: 15, // Reduced distance for smoother animation
+      opacity: 0,
+      transform: 'translateZ(0) translateY(15px)',
+    },
     visible: {
       y: 0,
       opacity: 1,
+      transform: 'translateZ(0) translateY(0px)',
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        type: "spring",
+        stiffness: 300,
+        damping: 25,
+        mass: 0.8,
       }
     }
   };
@@ -349,24 +361,15 @@ const HeroSection = () => {
           </motion.div>
         ))}
 
-        {/* Animated Grid Lines */}
-        <motion.div
-          className="absolute inset-0 opacity-10"
+        {/* Animated Grid Lines - DISABLED for debugging */}
+        <div
+          className="absolute inset-0 opacity-5"
           style={{
             backgroundImage: `
               linear-gradient(rgba(16, 6, 159, 0.2) 1px, transparent 1px),
               linear-gradient(90deg, rgba(16, 6, 159, 0.2) 1px, transparent 1px)
             `,
             backgroundSize: '60px 60px'
-          }}
-          animate={{
-            backgroundPositionX: [0, 60],
-            backgroundPositionY: [0, 60]
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
           }}
         />
       </div>
@@ -395,8 +398,18 @@ const HeroSection = () => {
           {/* Main Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight cursor-pointer"
             style={{ color: '#000000' }}
+            whileHover={{ 
+              scale: 1.02, 
+              transition: { type: "spring", stiffness: 400, damping: 25 }
+            }}
+            onMouseEnter={() => {
+              document.body.style.cursor = 'grab';
+            }}
+            onMouseLeave={() => {
+              document.body.style.cursor = 'auto';
+            }}
           >
             <strong>Desarrollo Web Profesional</strong> y{' '}
             <span className="gradient-text-modern animate-gradient-shift">Hosting Optimizado</span>
@@ -419,22 +432,59 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
             <motion.button
-              whileHover={{ scale: 1.05, y: -3, rotateX: 5 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -5, 
+                rotateX: 8,
+                transition: { type: "spring", stiffness: 400, damping: 25 }
+              }}
               whileTap={{ scale: 0.95 }}
-              className="group glass-card text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-500 flex items-center gap-2 animate-subtle-glow hover:animate-gradient-shift"
+              onMouseEnter={(e) => {
+                const btn = e.target as HTMLElement;
+                btn.style.boxShadow = '0 12px 40px rgba(16, 6, 159, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+                btn.style.background = 'linear-gradient(135deg, #0d0580 0%, #3d4ecc 100%)';
+              }}
+              onMouseLeave={(e) => {
+                const btn = e.target as HTMLElement;
+                btn.style.boxShadow = '0 8px 32px rgba(16, 6, 159, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                btn.style.background = 'linear-gradient(135deg, #10069f 0%, #455cff 100%)';
+              }}
+              className="group glass-card text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 flex items-center gap-2 animate-subtle-glow hover:animate-gradient-shift cursor-pointer"
               style={{
                 background: 'linear-gradient(135deg, #10069f 0%, #455cff 100%)',
                 boxShadow: '0 8px 32px rgba(16, 6, 159, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
               }}
             >
               Iniciar Proyecto
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              <motion.div
+                animate={{ x: [0, 3, 0] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform duration-300" />
+              </motion.div>
             </motion.button>
             
             <motion.button
-              whileHover={{ scale: 1.05, y: -3, rotateX: 5 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -5, 
+                rotateX: 8,
+                transition: { type: "spring", stiffness: 400, damping: 25 }
+              }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-full font-semibold text-lg transition-all duration-500"
+              onMouseEnter={(e) => {
+                const btn = e.target as HTMLElement;
+                btn.style.background = 'rgba(16, 6, 159, 0.1)';
+                btn.style.borderColor = '#0d0580';
+                btn.style.boxShadow = '0 8px 25px rgba(16, 6, 159, 0.2)';
+              }}
+              onMouseLeave={(e) => {
+                const btn = e.target as HTMLElement;
+                btn.style.background = 'rgba(255, 255, 255, 0.8)';
+                btn.style.borderColor = '#10069f';
+                btn.style.boxShadow = '';
+              }}
+              className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 cursor-pointer"
               style={{
                 border: '2px solid #10069f',
                 background: 'rgba(255, 255, 255, 0.8)',
@@ -442,7 +492,12 @@ const HeroSection = () => {
                 backdropFilter: 'blur(10px)'
               }}
             >
-              Ver Portafolio
+              <motion.span
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                Ver Portafolio
+              </motion.span>
             </motion.button>
           </motion.div>
 

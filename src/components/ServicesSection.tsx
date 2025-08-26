@@ -11,6 +11,7 @@ import {
   Search,
   Headphones
 } from 'lucide-react';
+import { ScrollTrigger, ParallaxText } from './ScrollTrigger';
 
 const ServicesSection = () => {
   const services = [
@@ -89,44 +90,46 @@ const ServicesSection = () => {
     <section id="servicios" className="py-20 gradient-mesh floating-particles">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#000000' }}>
-            Nuestros <span className="gradient-text-modern animate-gradient-shift">Servicios</span>
-          </h2>
-          <p className="text-lg max-w-3xl mx-auto" style={{ color: '#5d5d5d' }}>
+        <ScrollTrigger animationType="slide" className="text-center mb-16">
+          <ParallaxText speed={-0.2}>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6" style={{ color: '#000000' }}>
+              Nuestros <span className="gradient-text-modern animate-gradient-shift">Servicios</span>
+            </h2>
+          </ParallaxText>
+          <motion.p 
+            className="text-lg max-w-3xl mx-auto"
+            style={{ color: '#5d5d5d' }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
             Ofrecemos soluciones integrales para tu presencia digital, desde el diseño inicial 
             hasta el hosting y mantenimiento continuo.
-          </p>
-        </motion.div>
+          </motion.p>
+        </ScrollTrigger>
 
         {/* Services Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <motion.div
+            <ScrollTrigger 
               key={index}
-              variants={itemVariants}
-              whileHover={{ y: -15, scale: 1.03, rotateY: 5 }}
-              className="group rounded-2xl p-8 transition-all duration-500 animate-float"
-              style={{ 
-                animationDelay: `${index * 0.2}s`,
-                background: 'rgba(255, 255, 255, 0.8)',
-                border: '1px solid rgba(16, 6, 159, 0.1)',
-                backdropFilter: 'blur(10px)',
-                boxShadow: '0 8px 32px rgba(16, 6, 159, 0.1)'
-              }}
+              animationType="stagger"
+              delay={index * 0.1}
             >
+              <motion.div 
+                className="group rounded-2xl p-8 transition-all duration-500 cursor-pointer"
+                style={{ 
+                  animationDelay: `${index * 0.2}s`,
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  border: '1px solid rgba(16, 6, 159, 0.1)',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: '0 8px 32px rgba(16, 6, 159, 0.1)'
+                }}
+                whileHover={{
+                  boxShadow: '0 12px 40px rgba(16, 6, 159, 0.15)',
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+              >
               {/* Icon */}
               <div className="mb-6">
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-colors duration-300"
@@ -159,13 +162,15 @@ const ServicesSection = () => {
               </div>
 
               {/* Hover Effect */}
-              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
                    style={{
-                     background: 'linear-gradient(135deg, rgba(16, 6, 159, 0.05), rgba(69, 92, 255, 0.05))'
+                     background: 'linear-gradient(135deg, rgba(16, 6, 159, 0.08), rgba(69, 92, 255, 0.08))',
+                     backdropFilter: 'blur(4px)'
                    }}></div>
-            </motion.div>
+              </motion.div>
+            </ScrollTrigger>
           ))}
-        </motion.div>
+        </div>
 
         {/* CTA Section */}
         <motion.div

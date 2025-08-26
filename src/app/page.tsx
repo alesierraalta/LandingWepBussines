@@ -1,20 +1,36 @@
 import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
-import ServicesSection from '@/components/ServicesSection';
-import PortfolioSection from '@/components/PortfolioSection';
-import TestimonialsSection from '@/components/TestimonialsSection';
-import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import { 
+  LazyHeroSection,
+  LazyServicesSection, 
+  LazyPortfolioSection,
+  LazyTestimonialsSection,
+  LazyContactSection,
+  IntersectionLazyLoad
+} from '@/components/LazyComponents';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
-      <HeroSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <TestimonialsSection />
-      <ContactSection />
+      <LazyHeroSection />
+      
+      <IntersectionLazyLoad rootMargin="200px">
+        <LazyServicesSection />
+      </IntersectionLazyLoad>
+      
+      <IntersectionLazyLoad rootMargin="200px">
+        <LazyPortfolioSection />
+      </IntersectionLazyLoad>
+      
+      <IntersectionLazyLoad rootMargin="200px">
+        <LazyTestimonialsSection />
+      </IntersectionLazyLoad>
+      
+      <IntersectionLazyLoad rootMargin="100px">
+        <LazyContactSection />
+      </IntersectionLazyLoad>
+      
       <Footer />
     </main>
   );
