@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { 
   Code2, 
   Smartphone, 
@@ -12,8 +13,11 @@ import {
   Headphones
 } from 'lucide-react';
 import { ScrollTrigger, ParallaxText } from './ScrollTrigger';
+import SplineServices3D from './SplineServices3D';
 
 const ServicesSection = () => {
+  const [hoveredService, setHoveredService] = useState<number | null>(null);
+
   const services = [
     {
       icon: Code2,
@@ -117,7 +121,7 @@ const ServicesSection = () => {
               delay={index * 0.1}
             >
               <motion.div 
-                className="group rounded-2xl p-8 transition-all duration-500 cursor-pointer"
+                className="group rounded-2xl p-8 transition-all duration-500 cursor-pointer relative overflow-hidden"
                 style={{ 
                   animationDelay: `${index * 0.2}s`,
                   background: 'rgba(255, 255, 255, 0.8)',
@@ -129,7 +133,14 @@ const ServicesSection = () => {
                   boxShadow: '0 12px 40px rgba(16, 6, 159, 0.15)',
                   transition: { duration: 0.3, ease: "easeOut" }
                 }}
+                onHoverStart={() => setHoveredService(index)}
+                onHoverEnd={() => setHoveredService(null)}
               >
+              {/* 3D Background Effect */}
+              <SplineServices3D 
+                serviceIndex={index}
+                isHovered={hoveredService === index}
+              />
               {/* Icon */}
               <div className="mb-6">
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-colors duration-300"

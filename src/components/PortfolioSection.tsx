@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, Eye } from 'lucide-react';
 import Image from 'next/image';
+import SplinePortfolio3D from './SplinePortfolio3D';
 
 const PortfolioSection = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const filters = [
     { id: 'all', label: 'Todos' },
@@ -188,14 +190,22 @@ const PortfolioSection = () => {
                 variants={itemVariants}
                 layout
                 whileHover={{ y: -10 }}
-                className="group rounded-2xl overflow-hidden transition-all duration-300"
+                className="group rounded-2xl overflow-hidden transition-all duration-300 relative"
                 style={{
                   background: 'rgba(255, 255, 255, 0.9)',
                   border: '1px solid rgba(16, 6, 159, 0.1)',
                   backdropFilter: 'blur(10px)',
                   boxShadow: '0 8px 32px rgba(16, 6, 159, 0.1)'
                 }}
+                onHoverStart={() => setHoveredProject(project.id)}
+                onHoverEnd={() => setHoveredProject(null)}
               >
+                {/* 3D Background Effect */}
+                <SplinePortfolio3D 
+                  projectCategory={project.category}
+                  isVisible={hoveredProject === project.id}
+                  projectIndex={project.id}
+                />
                 {/* Project Image */}
                 <div className="relative overflow-hidden">
                   <div className="aspect-video flex items-center justify-center"

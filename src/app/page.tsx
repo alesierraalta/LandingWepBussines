@@ -8,12 +8,15 @@ import {
   LazyContactSection,
   IntersectionLazyLoad
 } from '@/components/LazyComponents';
+import { SplineSceneBasic } from '@/components/SplineSceneBasic';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
       <LazyHeroSection />
+      
+      <SplineSceneBasic />
       
       <IntersectionLazyLoad rootMargin="200px">
         <LazyServicesSection />

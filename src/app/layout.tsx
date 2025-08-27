@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ServiceStructuredData, WebsiteStructuredData, LocalBusinessStructuredData } from '@/components/StructuredData';
+import { Spline3DProvider, SplinePerformanceDebug } from '@/components/Spline3DManager';
 import "./globals.css";
 
 const geistSans = Geist({
@@ -116,7 +117,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Spline3DProvider maxConcurrentScenes={3}>
+          {children}
+          <SplinePerformanceDebug />
+        </Spline3DProvider>
       </body>
     </html>
   );

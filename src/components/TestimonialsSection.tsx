@@ -1,9 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
+import SplineTestimonials3D from './SplineTestimonials3D';
 
 const TestimonialsSection = () => {
+  const [activeTestimonial, setActiveTestimonial] = useState<number | null>(null);
+
   const testimonials = [
     {
       id: 1,
@@ -132,14 +136,22 @@ const TestimonialsSection = () => {
               key={testimonial.id}
               variants={itemVariants}
               whileHover={{ y: -5, scale: 1.02 }}
-              className="rounded-2xl p-8 transition-all duration-300 relative"
+              className="rounded-2xl p-8 transition-all duration-300 relative overflow-hidden"
               style={{
                 background: 'rgba(255, 255, 255, 0.9)',
                 border: '1px solid rgba(16, 6, 159, 0.1)',
                 backdropFilter: 'blur(10px)',
                 boxShadow: '0 8px 32px rgba(16, 6, 159, 0.1)'
               }}
+              onHoverStart={() => setActiveTestimonial(testimonial.id)}
+              onHoverEnd={() => setActiveTestimonial(null)}
             >
+              {/* 3D Background Effect */}
+              <SplineTestimonials3D 
+                testimonialIndex={index}
+                isActive={activeTestimonial === testimonial.id}
+                rating={testimonial.rating}
+              />
               {/* Quote Icon */}
               <div className="absolute -top-4 left-8">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center"
