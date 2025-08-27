@@ -1,15 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { OptimizedSplineLoader } from './Spline3DManager';
+import { SplineFallback3D } from './SplineFallback3D';
+import { useSplineStatus } from '@/lib/spline-config';
 
 interface SplineServices3DProps {
   serviceIndex: number;
   isHovered: boolean;
 }
 
-const SplineServices3D: React.FC<SplineServices3DProps> = ({ serviceIndex, isHovered }) => {
+export const SplineServices3D: React.FC<SplineServices3DProps> = ({ serviceIndex, isHovered }) => {
+  const { isEnabled: globalSplineEnabled, hasErrors } = useSplineStatus();
+  const [useSpline, setUseSpline] = useState(true);
+  const [splineError, setSplineError] = useState(false);
+  
+  // Use fallback if Spline is globally disabled or has persistent errors
+  const shouldUseFallback = !globalSplineEnabled || hasErrors || splineError || !useSpline;
+
   // Different 3D scenes for different services
   const sceneUrls = [
     'https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode', // Web Development
@@ -23,6 +32,31 @@ const SplineServices3D: React.FC<SplineServices3DProps> = ({ serviceIndex, isHov
   ];
 
   const currentScene = sceneUrls[serviceIndex % sceneUrls.length];
+
+  // Handle Spline errors gracefully
+  const handleSplineError = () => {
+    console.warn(`Spline scene failed for service ${serviceIndex}, switching to fallback`);
+    setSplineError(true);
+    setUseSpline(false);
+  };
+
+  // Fallback to CSS animation if Spline fails or is disabled
+  if (shouldUseFallback) {
+    return (
+      <SplineFallback3D 
+        serviceIndex={serviceIndex}
+        isHovered={isHovered}
+        className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl"
+        onRetry={() => {
+          if (globalSplineEnabled) {
+            setSplineError(false);
+            setUseSpline(true);
+          }
+        }}
+        disabled={!globalSplineEnabled}
+      />
+    );
+  }
 
   return (
     <motion.div
@@ -60,17 +94,17 @@ const SplineServices3D: React.FC<SplineServices3DProps> = ({ serviceIndex, isHov
         ))}
       </div>
 
-      {/* 3D Scene Container */}
+      {/* 3D Scene Container with Enhanced Error Handling */}
       <OptimizedSplineLoader
         sceneUrl={currentScene}
         sceneId={`service-${serviceIndex}`}
         className="relative w-full h-full"
         fallback={
-          <div className="flex items-center justify-center h-full">
-            <div className="animate-pulse">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-50"></div>
-            </div>
-          </div>
+          <SplineFallback3D 
+            serviceIndex={serviceIndex}
+            isHovered={isHovered}
+            className="w-full h-full"
+          />
         }
       />
 

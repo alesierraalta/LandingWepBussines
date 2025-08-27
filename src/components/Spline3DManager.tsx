@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useInView } from 'framer-motion';
+import { isSplineEnabled, reportSplineError, getSplineConfig } from '@/lib/spline-config';
 
 interface Spline3DContextType {
   activeScenes: Set<string>;
@@ -150,7 +151,7 @@ export const useSplinePerformance = () => {
   return performanceMetrics;
 };
 
-// Optimized Spline loader with performance monitoring
+// Optimized Spline loader with enhanced error handling and buffer validation
 export const OptimizedSplineLoader: React.FC<{
   sceneUrl: string;
   sceneId: string;
@@ -161,35 +162,160 @@ export const OptimizedSplineLoader: React.FC<{
   const { shouldLoad, ref } = useSplineVisibility(sceneId);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const maxRetries = 2;
+
+  // Validate scene URL format
+  const isValidSplineUrl = (url: string): boolean => {
+    return url.includes('spline.design') && url.endsWith('.splinecode');
+  };
+
+  // Enhanced error boundary for Spline scenes
+  const SplineErrorBoundary: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [hasError, setHasError] = useState(false);
+
+    useEffect(() => {
+      const handleError = (event: ErrorEvent) => {
+        if (event.message?.includes('buffer') || event.message?.includes('spline')) {
+          console.error('Spline buffer error detected:', event.error);
+          setHasError(true);
+          setError('3D scene data corrupted');
+        }
+      };
+
+      const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+        if (event.reason?.message?.includes('buffer') || event.reason?.message?.includes('spline')) {
+          console.error('Spline promise rejection:', event.reason);
+          setHasError(true);
+          setError('Failed to load 3D scene data');
+        }
+      };
+
+      window.addEventListener('error', handleError);
+      window.addEventListener('unhandledrejection', handleUnhandledRejection);
+
+      return () => {
+        window.removeEventListener('error', handleError);
+        window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+      };
+    }, []);
+
+    if (hasError) {
+      return (
+        <div className="flex items-center justify-center h-full text-gray-500">
+          <div className="text-center">
+            <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+              <span className="text-gray-400">3D</span>
+            </div>
+            <span className="text-sm">Scene temporarily unavailable</span>
+          </div>
+        </div>
+      );
+    }
+
+    return <>{children}</>;
+  };
 
   useEffect(() => {
-    if (shouldLoad && !isLoaded) {
+    // Check if Spline is globally enabled
+    if (!isSplineEnabled()) {
+      setError('3D scenes disabled for performance');
+      return;
+    }
+
+    if (shouldLoad && !isLoaded && !error) {
+      const config = getSplineConfig();
       const loadSpline = async () => {
         try {
+          // Validate URL before attempting to load
+          if (!isValidSplineUrl(sceneUrl)) {
+            const errorMsg = 'Invalid Spline scene URL format';
+            reportSplineError(sceneId, errorMsg);
+            throw new Error(errorMsg);
+          }
+
           const startTime = performance.now();
+          
+          // Pre-validate scene availability with configurable timeout
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), config.timeout);
+
+          try {
+            const response = await fetch(sceneUrl, { 
+              method: 'HEAD',
+              signal: controller.signal,
+              cache: 'force-cache'
+            });
+            clearTimeout(timeoutId);
+            
+            if (!response.ok) {
+              throw new Error(`Scene not accessible: ${response.status}`);
+            }
+
+            // Check content type if available
+            const contentType = response.headers.get('content-type');
+            if (contentType && !contentType.includes('application/octet-stream') && !contentType.includes('binary')) {
+              console.warn(`Unexpected content type for Spline scene: ${contentType}`);
+            }
+          } catch (fetchError) {
+            clearTimeout(timeoutId);
+            const errorMsg = fetchError instanceof Error ? fetchError.message : 'Scene validation failed';
+            
+            if (retryCount < config.maxRetries) {
+              console.warn(`Retrying scene load for ${sceneId} (${retryCount + 1}/${config.maxRetries})`);
+              setRetryCount(prev => prev + 1);
+              setTimeout(() => loadSpline(), 1000 * (retryCount + 1)); // Exponential backoff
+              return;
+            }
+            
+            reportSplineError(sceneId, errorMsg);
+            throw new Error('Scene validation failed');
+          }
           
           // Dynamically import Spline only when needed
           const { default: Spline } = await import('@splinetool/react-spline');
           
           const loadTime = performance.now() - startTime;
-          console.log(`Spline scene ${sceneId} loaded in ${loadTime.toFixed(2)}ms`);
+          if (config.debugMode) {
+            console.log(`Spline scene ${sceneId} validated and loaded in ${loadTime.toFixed(2)}ms`);
+          }
           
           setIsLoaded(true);
+          setRetryCount(0); // Reset retry count on success
         } catch (err) {
-          console.error(`Failed to load Spline scene ${sceneId}:`, err);
-          setError('Failed to load 3D scene');
+          const errorMsg = err instanceof Error ? err.message : 'Unknown Spline error';
+          console.error(`Failed to load Spline scene ${sceneId}:`, errorMsg);
+          reportSplineError(sceneId, errorMsg);
+          
+          if (retryCount < config.maxRetries) {
+            console.warn(`Retrying scene load for ${sceneId} (${retryCount + 1}/${config.maxRetries})`);
+            setRetryCount(prev => prev + 1);
+            setTimeout(() => loadSpline(), 2000 * (retryCount + 1)); // Exponential backoff
+          } else {
+            setError('3D scene temporarily unavailable');
+          }
         }
       };
 
       loadSpline();
     }
-  }, [shouldLoad, isLoaded, sceneId]);
+  }, [shouldLoad, isLoaded, sceneId, sceneUrl, retryCount, error]);
 
   if (error) {
     return (
       <div className={className} style={style} ref={ref}>
         <div className="flex items-center justify-center h-full text-gray-500">
-          <span>3D scene unavailable</span>
+          <div className="text-center">
+            <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-2 flex items-center justify-center">
+              <span className="text-gray-400">3D</span>
+            </div>
+            <span className="text-sm">{error}</span>
+            {retryCount > 0 && (
+              <div className="text-xs text-gray-400 mt-1">
+                Retry {retryCount}/{maxRetries}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -201,24 +327,38 @@ export const OptimizedSplineLoader: React.FC<{
         {fallback || (
           <div className="flex items-center justify-center h-full">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            {retryCount > 0 && (
+              <span className="ml-2 text-xs text-gray-500">Retrying...</span>
+            )}
           </div>
         )}
       </div>
     );
   }
 
-  // Lazy load the actual Spline component
+  // Lazy load the actual Spline component with error boundary
   const LazySpline = React.lazy(() => import('@splinetool/react-spline'));
 
   return (
     <div className={className} style={style} ref={ref}>
-      <React.Suspense fallback={fallback}>
-        <LazySpline
-          scene={sceneUrl}
-          style={{ width: '100%', height: '100%', background: 'transparent' }}
-          onLoad={() => console.log(`Spline scene ${sceneId} rendered`)}
-        />
-      </React.Suspense>
+      <SplineErrorBoundary>
+        <React.Suspense fallback={fallback}>
+          <LazySpline
+            scene={sceneUrl}
+            style={{ width: '100%', height: '100%', background: 'transparent' }}
+            onLoad={() => {
+              console.log(`Spline scene ${sceneId} rendered successfully`);
+              setError(null); // Clear any previous errors
+            }}
+            onError={(error) => {
+              const errorMsg = error instanceof Error ? error.message : 'Spline runtime error';
+              console.error(`Spline runtime error for ${sceneId}:`, errorMsg);
+              reportSplineError(sceneId, errorMsg);
+              setError('3D scene rendering failed');
+            }}
+          />
+        </React.Suspense>
+      </SplineErrorBoundary>
     </div>
   );
 };

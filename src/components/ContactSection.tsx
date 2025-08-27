@@ -9,7 +9,7 @@ import {
   Clock, 
   Send, 
   CheckCircle,
-  AlertCircle
+  AlertTriangle
 } from 'lucide-react';
 
 const ContactSection = () => {
@@ -352,7 +352,7 @@ const ContactSection = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-2 text-red-700 bg-red-100 border border-red-300 backdrop-blur-sm p-4 rounded-xl"
                 >
-                  <AlertCircle size={20} />
+                  <AlertTriangle size={20} />
                   <span>Hubo un error al enviar el mensaje. Inténtalo de nuevo.</span>
                 </motion.div>
               )}
