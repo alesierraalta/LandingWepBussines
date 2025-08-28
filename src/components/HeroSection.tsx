@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { ArrowRight, Code, Server, Zap, Brackets, Terminal, Database, Globe, Cpu } from 'lucide-react';
+import { ArrowRight, Code, Brackets, Terminal, Database, Globe, Cpu } from 'lucide-react';
 
 const HeroSection = () => {
 
