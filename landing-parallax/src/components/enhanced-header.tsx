@@ -15,6 +15,7 @@ export function EnhancedHeader() {
     { href: "#inicio", label: "Inicio", id: "inicio" },
     { href: "#servicios", label: "Servicios", id: "servicios" },
     { href: "#portafolio", label: "Portafolio", id: "portafolio" },
+    { href: "#testimonios", label: "Testimonios", id: "testimonios" },
     { href: "#nosotros", label: "Nosotros", id: "nosotros" },
     { href: "#contacto", label: "Contacto", id: "contacto" }
   ];
@@ -33,7 +34,7 @@ export function EnhancedHeader() {
       }
 
       // Find active section based on scroll position
-      const sections = ['inicio', 'testimonios', 'servicios', 'portafolio', 'nosotros', 'contacto'];
+      const sections = ['inicio', 'servicios', 'portafolio', 'testimonios', 'nosotros', 'contacto'];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {

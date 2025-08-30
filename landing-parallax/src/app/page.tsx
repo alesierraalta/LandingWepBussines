@@ -1,8 +1,9 @@
 import { HeroParallaxDemo } from "@/components/hero-parallax-demo";
 import { EnhancedHeader } from "@/components/enhanced-header";
 import { ServicesBento } from "@/components/services-bento";
-import { SocialProof } from "@/components/social-proof";
+import { SierraTestimonials } from "@/components/sierra-testimonials";
 import { PortfolioDemo } from "@/components/portfolio-demo";
+import WhatsAppContactForm from "@/components/whatsapp-contact-form";
 
 export default function Home() {
   return (
@@ -13,10 +14,6 @@ export default function Home() {
         <HeroParallaxDemo />
       </section>
       
-      <section id="testimonios">
-        <SocialProof />
-      </section>
-      
       <section id="servicios">
         <ServicesBento />
       </section>
@@ -25,15 +22,8 @@ export default function Home() {
         <PortfolioDemo />
       </section>
       
-      {/* Contact Section Placeholder */}
-      <section id="contacto" className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">¿Listo para Dominar Tu Sector?</h2>
-          <p className="text-xl text-gray-600 mb-8">Contacta con nosotros y comienza tu transformación digital</p>
-          <div className="text-lg text-gray-700">
-            📧 contacto@sierrax.com | 📞 +1 (555) 123-4567
-          </div>
-        </div>
+      <section id="testimonios">
+        <SierraTestimonials />
       </section>
       
       {/* Nosotros Section Placeholder */}
@@ -60,6 +50,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      {/* Contact Section with WhatsApp Integration */}
+      <WhatsAppContactForm />
     </div>
   );
 }
