@@ -5,6 +5,7 @@ import { SierraTestimonials } from "@/components/sierra-testimonials";
 import { PortfolioDemo } from "@/components/portfolio-demo";
 import MinimalContact from "@/components/minimal-contact";
 import { AboutUs } from "@/components/about-us";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -34,6 +35,9 @@ export default function Home() {
       
       {/* Contact Section - Minimal Design */}
       <MinimalContact />
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
