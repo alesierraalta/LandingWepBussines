@@ -14,7 +14,7 @@ const features = [
     Icon: DesktopIcon,
     name: "Sitios Que Dominan Tu Sector",
     description: "Páginas web que posicionan tu negocio como el líder indiscutible. Tus competidores quedarán atrás mientras tú captures todos los clientes de tu industria.",
-    href: "#corporativos",
+    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20sitios%20web%20corporativos%20que%20dominen%20mi%20sector",
     cta: "Dominar mi sector",
     background: (
       <div className="absolute -right-20 -top-20 w-[600px] h-[400px] opacity-60 overflow-hidden">
@@ -35,7 +35,7 @@ const features = [
     Icon: MobileIcon,
     name: "Captura Clientes 24/7",
     description: "Tu página vende mientras duermes. Diseño que convierte en cualquier dispositivo, cualquier hora, cualquier lugar. No pierdas ni un cliente más.",
-    href: "#responsive",
+    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20diseño%20responsive%20que%20capture%20clientes%2024/7",
     cta: "Vender mientras duermo",
     background: (
       <div className="absolute -right-20 -top-20 w-[600px] h-[400px] opacity-60 overflow-hidden">
@@ -56,7 +56,7 @@ const features = [
     Icon: GlobeIcon,
     name: "Ser el #1 en Google",
     description: "Imagínate aparecer primero cuando buscan tu servicio. Tus clientes te encuentran antes que a la competencia. Más tráfico = más ventas = más dinero.",
-    href: "#seo",
+    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20SEO%20para%20ser%20el%20%231%20en%20Google",
     cta: "Ser #1 en Google",
     background: (
       <div className="absolute -right-20 -top-20 w-[600px] h-[400px] opacity-60 overflow-hidden">
@@ -77,7 +77,7 @@ const features = [
     Icon: LightningBoltIcon,
     name: "Nunca Más Clientes Impacientes",
     description: "3 segundos pueden costarte miles de pesos. Sitios ultra-rápidos que mantienen a tus visitantes enganchados hasta que compren.",
-    href: "#velocidad",
+    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20sitios%20web%20ultra-rápidos%20para%20no%20perder%20clientes",
     cta: "Evitar perder clientes",
     background: (
       <div className="absolute -right-20 -top-20 w-[600px] h-[400px] opacity-60 overflow-hidden">
@@ -98,7 +98,7 @@ const features = [
     Icon: RocketIcon,
     name: "Éxito Garantizado o Reembolso",
     description: "No te dejamos solo. Te acompañamos hasta que tengas el sitio que genere los resultados prometidos. Si no funciona, te devolvemos tu dinero.",
-    href: "#soporte",
+    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20su%20garantía%20de%20éxito%20o%20reembolso",
     cta: "Ver garantía",
     background: (
       <div className="absolute -right-20 -top-20 w-[600px] h-[400px] opacity-60 overflow-hidden">
