@@ -90,7 +90,7 @@ Mis datos de contacto:
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Teléfono</p>
-                  <p className="text-gray-600">+52 55 1234-5678</p>
+                  <p className="text-gray-600">+58 241 123-4567</p>
                 </div>
               </div>
 
@@ -110,7 +110,7 @@ Mis datos de contacto:
                 </div>
                 <div>
                   <p className="font-medium text-gray-900">Ubicación</p>
-                  <p className="text-gray-600">Ciudad de México, México</p>
+                  <p className="text-gray-600">Valencia, Carabobo, Venezuela</p>
                 </div>
               </div>
             </div>
@@ -197,7 +197,7 @@ Mis datos de contacto:
                     id="phone"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder="+52 55 1234-5678"
+                    placeholder="+58 241 123-4567"
                     className="mt-1"
                     required
                   />

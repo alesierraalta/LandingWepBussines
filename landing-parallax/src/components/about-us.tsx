@@ -3,7 +3,6 @@
 import React from 'react';
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { HyperText } from "@/components/magicui/hyper-text";
-import { SparklesText } from "@/components/magicui/sparkles-text";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import AboutUsContent from "@/components/about-us-content";
 
@@ -14,13 +13,7 @@ export const AboutUs = () => {
         <div className="flex flex-col items-center">
           <BlurFade delay={0.2} inView>
             <h1 className="text-4xl md:text-6xl font-bold text-black dark:text-white mb-4 text-center">
-              <SparklesText
-                className="text-4xl md:text-6xl font-bold"
-                colors={{ first: "#10069f", second: "#455cff" }}
-                sparklesCount={8}
-              >
-                Conoce a
-              </SparklesText>
+              <span className="text-4xl md:text-6xl font-bold">Conoce a</span>
               <br />
               <HyperText 
                 className="text-4xl md:text-[6rem] font-bold mt-1 leading-none text-center"

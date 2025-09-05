@@ -151,7 +151,7 @@ ${formData.company ? `🏢 Empresa: ${formData.company}` : ''}
 ⏰ Urgencia: ${getTimelineMessage(formData.timeline)}
 
 🎯 *MI OBJETIVO:*
-${formData.description || 'Necesito una landing page que convierta visitantes en clientes reales y genere al menos $50K MXN/mes adicionales.'}
+${formData.description || 'Necesito una landing page que convierta visitantes en clientes reales y genere al menos $50K USD/mes adicionales.'}
 
 🚀 *LO QUE BUSCO:*
 ✅ Landing page que genere 3X más conversiones
@@ -159,9 +159,9 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
 ✅ ROI comprobado de +340%
 ✅ Entrega en máximo 15 días
 
-💰 *QUIERO MI AUDITORÍA GRATUITA DE $5,000 MXN*
+💰 *QUIERO MI AUDITORÍA GRATUITA DE $5,000 USD*
 
-¿Pueden ayudarme a dominar mi mercado y generar $85K MXN/mes como sus otros clientes?
+¿Pueden ayudarme a dominar mi mercado y generar $85K USD/mes como sus otros clientes?
 
 *Enviado desde sierrax.com* 
 *¡RESPUESTA EN MENOS DE 2 HORAS!* ⚡`;
@@ -186,7 +186,7 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
     // Simulate processing delay for better UX
     setTimeout(() => {
       const whatsappMessage = generateWhatsAppMessage();
-      const whatsappNumber = "+525512345678"; // Replace with your actual WhatsApp number
+      const whatsappNumber = "+582411234567"; // Replace with your actual WhatsApp number
       const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
       
       // Open WhatsApp
@@ -283,7 +283,7 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
                 <strong className="text-red-600">⚠️ ADVERTENCIA:</strong> Cada día que tu competencia tiene una landing page profesional y tú no, 
                 están capturando a TUS clientes potenciales. <br/><br/>
                 <span className="bg-yellow-100 px-2 py-1 rounded font-semibold">
-                  Un cliente perdido hoy = $2,500 MXN menos en tu bolsillo este mes
+                  Un cliente perdido hoy = $2,500 USD menos en tu bolsillo este mes
                 </span>
               </p>
             </div>
@@ -295,7 +295,7 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
                 </div>
                 <div>
                   <p className="font-semibold text-black">Teléfono Directo</p>
-                  <p className="text-gray-600">+52 55 1234-5678</p>
+                  <p className="text-gray-600">+58 241 123-4567</p>
                 </div>
               </div>
 
@@ -315,7 +315,7 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
                 </div>
                 <div>
                   <p className="font-semibold text-black">Ubicación</p>
-                  <p className="text-gray-600">Ciudad de México, México</p>
+                  <p className="text-gray-600">Valencia, Carabobo, Venezuela</p>
                 </div>
               </div>
 
@@ -355,7 +355,7 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
               {/* Testimonial Express */}
               <div className="mt-4 p-3 bg-white rounded-lg border-l-4 border-green-400">
                 <p className="text-sm italic text-gray-700 mb-2">
-                  "En 3 semanas mi landing generó $85,000 MXN. El ROI fue inmediato."
+                  "En 3 semanas mi landing generó $85,000 USD. El ROI fue inmediato."
                 </p>
                 <p className="text-xs text-gray-600">- Carlos M., CEO TechnoPlus</p>
               </div>
@@ -382,10 +382,10 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
                       <span className="text-orange-700 font-bold text-xs">⏰ CUPO LIMITADO - SOLO 5 PROYECTOS</span>
                     </div>
                     <h3 className="text-2xl font-bold text-black mb-2">
-                      Consigue Tu Landing de $85K MXN/mes
+                      Consigue Tu Landing de $85K USD/mes
                     </h3>
                     <p className="text-green-600 font-semibold text-lg">
-                      💰 GRATIS: Auditoría de tu competencia ($5,000 MXN de valor)
+                      💰 GRATIS: Auditoría de tu competencia ($5,000 USD de valor)
                     </p>
                   </div>
                   
@@ -453,7 +453,7 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
                           id="phone"
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
-                          placeholder="+52 55 1234-5678"
+                          placeholder="+58 241 123-4567"
                           className={`mt-1 ${errors.phone ? 'border-red-500 focus:border-red-500' : ''}`}
                           required
                         />
@@ -535,7 +535,7 @@ ${formData.description || 'Necesito una landing page que convierta visitantes en
                         id="description"
                         value={formData.description}
                         onChange={(e) => handleInputChange('description', e.target.value)}
-                        placeholder="Ejemplo: 'Tengo una empresa de [tu sector] y necesito generar al menos $50K MXN/mes adicionales. Mi competencia me está ganando clientes online. Necesito una landing que convierta visitantes en ventas reales. Mi público objetivo es [descripción] y mi mayor problema actual es [problema]'"
+                        placeholder="Ejemplo: 'Tengo una empresa de [tu sector] y necesito generar al menos $50K USD/mes adicionales. Mi competencia me está ganando clientes online. Necesito una landing que convierta visitantes en ventas reales. Mi público objetivo es [descripción] y mi mayor problema actual es [problema]'"
                         rows={4}
                         className="mt-1"
                       />
