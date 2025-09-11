@@ -117,20 +117,7 @@ Mis datos de contacto:
 
             {/* Simple stats */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border">
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-blue-600">100+</div>
-                  <div className="text-sm text-gray-600">Proyectos</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-green-600">5+</div>
-                  <div className="text-sm text-gray-600">Años</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-purple-600">24h</div>
-                  <div className="text-sm text-gray-600">Respuesta</div>
-                </div>
-              </div>
+
             </div>
           </div>
 

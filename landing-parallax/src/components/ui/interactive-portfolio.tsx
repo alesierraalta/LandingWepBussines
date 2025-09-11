@@ -10,10 +10,10 @@ const InteractivePortfolio = () => {
   const projects = [
     {
       title: "E-Commerce Premium",
-      description: "Tienda online que vende 24/7",
+      description: "Tienda online profesional",
       image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
       icon: <FaStore size={24} className="text-white" />,
-      stats: "+340% ventas online",
+      stats: "Ventas optimizadas",
       sector: "Retail"
     },
     {
@@ -21,7 +21,7 @@ const InteractivePortfolio = () => {
       description: "Profesional y confiable",
       image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=800&q=80",
       icon: <FaHospital size={24} className="text-white" />,
-      stats: "+280% citas online",
+      stats: "Citas online eficientes",
       sector: "Salud"
     },
     {
@@ -81,14 +81,14 @@ const InteractivePortfolio = () => {
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)'
           }}
         >
-          Proyectos Que Dominan Sus Sectores
+          Proyectos Que Impulsan el Crecimiento
         </h1>
         <p 
           className="text-lg md:text-xl font-medium max-w-3xl mx-auto"
           style={{ color: '#5d5d5d' }}
         >
-          Cada uno de estos negocios ahora es el líder digital de su industria. 
-          <span style={{ color: '#10069f', fontWeight: 'bold' }}> ¿Cuándo será tu turno?</span>
+          Empresas emergentes y negocios que han transformado su presencia digital. 
+          <span style={{ color: '#10069f', fontWeight: 'bold' }}> Tu proyecto puede ser el siguiente.</span>
         </p>
       </div>
 
@@ -196,7 +196,7 @@ const InteractivePortfolio = () => {
             className="text-lg font-semibold mb-6"
             style={{ color: '#5d5d5d' }}
           >
-            Estos resultados no son casualidad. <span style={{ color: '#10069f', fontWeight: 'bold' }}>Son estrategia pura.</span>
+            El crecimiento digital requiere estrategia. <span style={{ color: '#10069f', fontWeight: 'bold' }}>Nosotros la tenemos.</span>
           </p>
           <div 
             className="inline-block px-8 py-4 rounded-lg font-bold text-white text-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
@@ -205,11 +205,9 @@ const InteractivePortfolio = () => {
               boxShadow: '0 4px 14px 0 rgba(16, 6, 159, 0.3)'
             }}
           >
-            Quiero Estos Resultados Para Mi Negocio
+            Quiero Impulsar Mi Negocio
           </div>
-          <p className="text-sm text-gray-600 mt-3">
-            🚀 Consulta gratuita • Estrategia personalizada • Resultados garantizados
-          </p>
+
         </div>
       </div>
     </div>

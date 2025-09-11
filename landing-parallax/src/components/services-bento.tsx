@@ -5,17 +5,22 @@ import {
   GlobeIcon,
   RocketIcon,
   LightningBoltIcon,
+  FileTextIcon,
+  BellIcon,
+  Share1Icon,
+  CalendarIcon,
+  SpeakerLoudIcon,
 } from "@radix-ui/react-icons";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import Image from "next/image";
 
 const features = [
   {
-    Icon: DesktopIcon,
-    name: "Presencia Digital Sólida",
-    description: "Construimos tu presencia online para generar $5,000+ mensuales en nuevos clientes.",
-    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20sitios%20web%20que%20generen%20$5000%20mensuales",
-    cta: "Generar $5,000/mes",
+      Icon: FileTextIcon,
+      name: "Empresas con Landing Pages",
+      description: "Empresas que usan landing pages generan 12 veces más leads que aquellas con 5 páginas o menos.",
+      href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20landing%20pages%20para%20empresas",
+      cta: "Crear Landing Pages",
     background: (
         <div className="absolute inset-0 opacity-60 overflow-hidden">
          <div className="relative w-full h-full">
@@ -37,17 +42,17 @@ const features = [
     className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
   },
   {
-    Icon: MobileIcon,
-    name: "Ventas Automáticas 24/7",
-    description: "Sistema que convierte visitantes en clientes, generando $2,000-$8,000 mensuales adicionales.",
-    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20sistema%20de%20ventas%20automáticas%2024/7",
-    cta: "Automatizar ventas",
+      Icon: BellIcon,
+      name: "Ventaja Competitiva Real",
+      description: "Solo 52% de empresas usan landing pages para generar leads, creando oportunidad para destacar.",
+      href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20aprovechar%20la%20ventaja%20de%20landing%20pages",
+      cta: "Obtener Ventaja",
     background: (
         <div className="absolute inset-0 opacity-60 overflow-hidden">
          <div className="relative w-full h-full">
            <Image
              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop&crop=center"
-             alt="Handshake profesional cerrando negocios 24/7"
+             alt="Handshake profesional cerrando negocios"
              fill
              className="object-cover"
              style={{
@@ -63,11 +68,11 @@ const features = [
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
   {
-    Icon: GlobeIcon,
-    name: "Más Visibilidad Online",
-    description: "Mejoramos tu posicionamiento para aumentar tus ingresos en $3,000-$10,000 mensuales.",
-    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20SEO%20para%20aumentar%20mis%20ingresos",
-    cta: "Aumentar ingresos",
+      Icon: Share1Icon,
+      name: "Conversión vs Páginas Genéricas",
+      description: "Landing pages optimizadas convierten 220% mejor que páginas web genéricas de empresas.",
+      href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20mejorar%20conversión%20vs%20competencia",
+      cta: "Superar Competencia",
     background: (
         <div className="absolute inset-0 opacity-60 overflow-hidden">
          <div className="relative w-full h-full">
@@ -89,11 +94,11 @@ const features = [
     className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
   },
   {
-    Icon: LightningBoltIcon,
-    name: "Optimización de Conversión",
-    description: "Sitios optimizados que convierten 40% más visitantes en clientes pagando.",
-    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20optimización%20de%20conversión",
-    cta: "Convertir más clientes",
+      Icon: CalendarIcon,
+      name: "Escalabilidad Empresarial",
+      description: "Empresas con 31-40 landing pages obtienen 7 veces más leads que empresas sin estrategia.",
+      href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20escalar%20mi%20empresa%20con%20landing%20pages",
+      cta: "Escalar Negocio",
     background: (
         <div className="absolute inset-0 opacity-60 overflow-hidden">
          <div className="relative w-full h-full">
@@ -115,17 +120,17 @@ const features = [
     className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
   {
-    Icon: RocketIcon,
-    name: "ROI Comprobado",
-    description: "Nuestros clientes recuperan su inversión en 60-90 días y generan $15,000+ anuales.",
-    href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20información%20sobre%20ROI%20y%20resultados%20comprobados",
-    cta: "Ver resultados",
+      Icon: SpeakerLoudIcon,
+      name: "Optimización Empresarial B2B",
+      description: "68% de empresas B2B usan landing pages para leads, mientras otras pierden oportunidades.",
+      href: "https://wa.me/582411234567?text=Hola%2C%20quiero%20optimización%20empresarial%20B2B",
+      cta: "Optimizar B2B",
     background: (
         <div className="absolute inset-0 opacity-60 overflow-hidden">
          <div className="relative w-full h-full">
            <Image
              src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=600&h=400&fit=crop&crop=center"
-             alt="Equipo celebrando éxito garantizado"
+             alt="Equipo celebrando éxito del proyecto"
              fill
              className="object-cover"
              style={{
@@ -148,10 +153,10 @@ export function ServicesBento() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-black mb-6 service-title">
-Por Qué Nuestros Clientes Facturan 3X Más
+Ventaja Competitiva Empresarial
           </h2>
           <p className="text-lg md:text-xl max-w-3xl mx-auto font-medium service-subtitle">
-No es casualidad. Usamos estrategias comprobadas que convierten visitantes en clientes pagantes. Esto es lo que hace la diferencia:
+Mientras 48% de empresas no tienen landing pages optimizadas, nosotros creamos estrategias que generan resultados medibles. Esto es lo que marca la diferencia:
           </p>
         </div>
         

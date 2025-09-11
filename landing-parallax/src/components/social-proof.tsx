@@ -95,7 +95,7 @@ export function SocialProof() {
         {/* Urgency Call-to-Action */}
         <div className="text-center mt-12">
           <p className="text-lg font-semibold text-gray-700 mb-6">
-            ⚠️ Solo trabajamos con 3 nuevos clientes por mes para garantizar resultados excepcionales
+            ⚠️ Solo trabajamos con 3 nuevos clientes por mes para ofrecer resultados excepcionales
           </p>
           <div 
             className="inline-block px-8 py-4 rounded-lg font-bold text-white text-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
@@ -107,7 +107,7 @@ export function SocialProof() {
             Reservar Mi Cupo Este Mes
           </div>
           <p className="text-sm text-gray-600 mt-3">
-            📞 Consulta gratuita • Sin compromiso • Resultados garantizados
+            📞 Consulta gratuita • Sin compromiso • Resultados efectivos
           </p>
         </div>
       </div>

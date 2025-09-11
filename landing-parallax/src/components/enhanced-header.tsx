@@ -79,18 +79,20 @@ export function EnhancedHeader() {
       <header 
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out ${
           isScrolled 
-            ? 'bg-black/95 backdrop-blur-lg shadow-lg shadow-blue-500/10 border-b border-gray-800' 
-            : 'bg-black/90 backdrop-blur-sm'
+            ? 'bg-black backdrop-blur-lg shadow-lg shadow-blue-500/10 border-b border-gray-800' 
+            : 'bg-black backdrop-blur-sm'
         }`}
       >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-20">
+            <div className="flex justify-between md:justify-between items-center h-20 relative">
               
-              {/* Logo */}
-              <SierraXLogo isScrolled={isScrolled} size="medium" />
+              {/* Logo - Centered on mobile, left on desktop */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 md:absolute md:left-8 md:transform-none">
+                <SierraXLogo isScrolled={isScrolled} size="medium" />
+              </div>
 
               {/* Desktop Navigation */}
-              <nav className="hidden md:flex space-x-1">
+              <nav className="hidden md:flex space-x-1 absolute left-1/2 transform -translate-x-1/2">
                 {navItems.map((item, index) => (
                   <button
                     key={item.id}
@@ -126,28 +128,13 @@ export function EnhancedHeader() {
                 ))}
               </nav>
 
-              {/* CTA Button and Mobile Menu */}
-              <div className="flex items-center space-x-4">
-                {/* Enhanced CTA Button */}
-                <div className="hidden md:block">
-                  <Button
-                    className="font-bold text-white px-6 py-3 text-sm hover:scale-105 transition-all duration-300"
-                    style={{
-                      backgroundColor: '#10069f',
-                      borderColor: '#455cff',
-                      borderWidth: '2px',
-                      boxShadow: '0 4px 20px rgba(16, 6, 159, 0.4)'
-                    }}
-                  >
-                    🚀 Dominar Mi Sector Ahora
-                  </Button>
-                </div>
-
-                {/* Mobile Menu Button */}
+              {/* Mobile Menu Button */}
+              <div className="flex items-center">
+                {/* Mobile Menu Button - Positioned on the right */}
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={`md:hidden transition-all duration-300 ${
+                  className={`md:hidden transition-all duration-300 ml-auto z-10 ${
                     isScrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white hover:text-blue-200'
                   }`}
                   onClick={() => setIsOpen(!isOpen)}
@@ -161,16 +148,16 @@ export function EnhancedHeader() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed inset-0 z-30 bg-white/95 backdrop-blur-lg md:hidden">
-          <div className="flex flex-col justify-center items-center h-full space-y-8">
+        <div className="fixed inset-0 z-30 bg-black/95 backdrop-blur-lg md:hidden">
+          <div className="flex flex-col justify-center items-center h-full space-y-8 text-center">
             {navItems.map((item, index) => (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.href)}
-                className={`text-2xl font-bold transition-all duration-300 px-6 py-3 rounded-xl ${
+                className={`text-2xl font-bold transition-all duration-300 px-8 py-4 rounded-xl w-64 text-center ${
                   activeSection === item.id
                     ? 'text-white shadow-lg transform scale-110'
-                    : 'text-gray-700 hover:text-blue-600'
+                    : 'text-white/90 hover:text-blue-400'
                 }`}
                 style={{
                   backgroundColor: activeSection === item.id ? '#10069f' : 'transparent',
@@ -180,21 +167,6 @@ export function EnhancedHeader() {
                 {item.label}
               </button>
             ))}
-            
-            <div className="mt-8">
-              <Button
-                className="font-bold text-white px-8 py-4 text-lg hover:scale-105 transition-all duration-300"
-                onClick={() => setIsOpen(false)}
-                style={{
-                  backgroundColor: '#10069f',
-                  borderColor: '#455cff',
-                  borderWidth: '2px',
-                  boxShadow: '0 8px 30px rgba(16, 6, 159, 0.4)'
-                }}
-              >
-                🚀 Dominar Mi Sector
-              </Button>
-            </div>
           </div>
         </div>
       )}
